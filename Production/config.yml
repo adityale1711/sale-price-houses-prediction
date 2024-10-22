@@ -1,0 +1,5 @@
+# Will cause syntax error since they begin with numbers
+variables_to_rename:
+  1stFlrSF: FirstFlrSF
+  2ndFlrSF: SecondFlrSF
+  3SsnPorch: ThreeSsnPorch
