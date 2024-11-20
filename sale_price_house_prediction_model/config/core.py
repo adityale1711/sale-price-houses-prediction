@@ -1,11 +1,11 @@
-import Production
+import sale_price_house_prediction_model
 
 from typing import Dict, List, Sequence, Optional
 from pathlib import Path
 from pydantic import BaseModel
 from strictyaml import YAML, load
 
-PACKAGE_ROOT = Path(Production.__file__).resolve().parent
+PACKAGE_ROOT = Path(sale_price_house_prediction_model.__file__).resolve().parent
 DATASET_DIR = PACKAGE_ROOT / 'datasets'
 CONFIG_FILE_PATH = PACKAGE_ROOT / 'config.yml'
 TRAINED_MODEL_DIR = PACKAGE_ROOT / 'trained_models'
@@ -14,6 +14,7 @@ TRAINED_MODEL_DIR = PACKAGE_ROOT / 'trained_models'
 class AppConfig(BaseModel):
     package_name: str
     training_data_file: str
+    test_data_file: str
     pipeline_save_file: str
 
 # All configuration that relevant to model training and feature engineering
