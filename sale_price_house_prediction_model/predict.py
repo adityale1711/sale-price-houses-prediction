@@ -2,12 +2,12 @@ import numpy as np
 import typing as t
 import pandas as pd
 
-from Production import __version__ as _version
-from config.core import config
-from processing.validation import validate_input
-from processing.data_manager import load_pipeline
+from sale_price_house_prediction_model import __version__ as _version
+from sale_price_house_prediction_model.config.core import config
+from sale_price_house_prediction_model.processing.validation import validate_input
+from sale_price_house_prediction_model.processing.data_manager import load_pipeline
 
-pipeline_file_name = f'{config.app_config.pipeline_save_file}{_version}.pkl'
+pipeline_file_name = f'{config.app_cnf.pipeline_save_file}{_version}.pkl'
 _price_pipe = load_pipeline(file_name=pipeline_file_name)
 
 # Make prediction using a saved model pipeline
@@ -21,7 +21,7 @@ def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
     }
 
     if not errors:
-        predictions = _price_pipe.predict(X=validated_data[config.model_config.features])
+        predictions = _price_pipe.predict(X=validated_data[config.model_cnf.features])
         results = {
             'predictions': [np.exp(pred) for pred in predictions],
             'version': _version,

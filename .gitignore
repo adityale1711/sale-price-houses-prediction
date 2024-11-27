@@ -1,2 +1,8 @@
 .DS_Store
 .idea/
+sale_price_house_prediction_model/__pycache__/
+sale_price_house_prediction_model/config/__pycache__/
+sale_price_house_prediction_model/processing/__pycache__/
+tests/__pycache__/
+sale_price_house_prediction_model/datasets/*
+sale_price_house_prediction_model/trained_models/*

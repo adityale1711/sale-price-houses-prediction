@@ -1,13 +1,13 @@
+from config.core import config
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import Lasso
 from sklearn.preprocessing import Binarizer, MinMaxScaler
-from processing import features as pp
-from config.core import config
 from feature_engine.wrappers import SklearnTransformerWrapper
 from feature_engine.encoding import RareLabelEncoder, OrdinalEncoder
 from feature_engine.selection import DropFeatures
 from feature_engine.imputation import CategoricalImputer, AddMissingIndicator, MeanMedianImputer
 from feature_engine.transformation import LogTransformer
+from sale_price_house_prediction_model.processing import features as pp
 
 price_pipe = Pipeline(
     [
@@ -16,80 +16,80 @@ price_pipe = Pipeline(
             'missing_imputation',
             CategoricalImputer(
                 imputation_method='missing',
-                variables=config.model_config.categorical_vars_with_na_missing
+                variables=config.model_cnf.categorical_vars_with_na_missing
             )
         ),
         (
             'frequent_imputation',
             CategoricalImputer(
                 imputation_method='frequent',
-                variables=config.model_config.categorical_vars_with_na_frequent
+                variables=config.model_cnf.categorical_vars_with_na_frequent
             )
         ),
 
         # Add Missing Indicator
         (
             'missing_indicator',
-            AddMissingIndicator(variables=config.model_config.numerical_vars_with_na)
+            AddMissingIndicator(variables=config.model_cnf.numerical_vars_with_na)
         ),
 
         # Impute numerical variables with the mean
         (
             'mean_imputation',
-            MeanMedianImputer(config.model_config.numerical_vars_with_na)
+            MeanMedianImputer(imputation_method='mean', variables=config.model_cnf.numerical_vars_with_na)
         ),
 
         # Temporal variables
         (
             'elapsed_time',
             pp.TemporalVariableTransformer(
-                variables=config.model_config.temporal_vars,
-                reference_variable=config.model_config.ref_var
+                variables=config.model_cnf.temporal_vars,
+                reference_variable=config.model_cnf.ref_var
             )
         ),
         (
             'drop_features',
-            DropFeatures(features_to_drop=[config.model_config.ref_var])
+            DropFeatures(features_to_drop=[config.model_cnf.ref_var])
         ),
 
         # Variable Transformation
         (
             'log',
-            LogTransformer(variables=config.model_config.numerical_log_vars)
+            LogTransformer(variables=config.model_cnf.numericals_log_vars)
         ),
         (
             'binarizer',
-            SklearnTransformerWrapper(transformer=Binarizer(threshold=0), variables=config.model_config.binarize_vars)
+            SklearnTransformerWrapper(transformer=Binarizer(threshold=0), variables=config.model_cnf.binarize_vars)
         ),
 
         # Mappers
         (
             'mapper_qual',
-            pp.Mapper(variables=config.model_config.qual_vars, mappings=config.model_config.qual_mappings)
+            pp.Mapper(variables=config.model_cnf.qual_vars, mappings=config.model_cnf.qual_mappings)
         ),
         (
             'mapper_exposure',
-            pp.Mapper(variables=config.model_config.exposure_vars, mappings=config.model_config.exposure_mappings)
+            pp.Mapper(variables=config.model_cnf.exposure_vars, mappings=config.model_cnf.exposure_mappings)
         ),
         (
             'mapper_finish',
-            pp.Mapper(variables=config.model_config.finish_vars, mappings=config.model_config.finish_mappings)
+            pp.Mapper(variables=config.model_cnf.finish_vars, mappings=config.model_cnf.finish_mappings)
         ),
         (
             'mapper_garage',
-            pp.Mapper(variables=config.model_config.garage_vars, mappings=config.model_config.garage_mappings)
+            pp.Mapper(variables=config.model_cnf.garage_vars, mappings=config.model_cnf.garage_mappings)
         ),
 
         # Categorical Encoding
         (
             'rare_label_encoder',
-            RareLabelEncoder(tol=0.01, n_categories=1, variables=config.model_config.categorical_vars)
+            RareLabelEncoder(tol=0.01, n_categories=1, variables=config.model_cnf.categorical_vars)
         ),
 
         # Encode categorical variables using the target mean
         (
             'categorical_encoder',
-            OrdinalEncoder(encoding_method='ordered', variables=config.model_config.categorical_vars)
+            OrdinalEncoder(encoding_method='ordered', variables=config.model_cnf.categorical_vars)
         ),
         (
             'scaler',
@@ -97,7 +97,7 @@ price_pipe = Pipeline(
         ),
         (
             'Lasso',
-            Lasso(alpha=config.model_config.alpha, random_state=config.model_config.random_state)
+            Lasso(alpha=config.model_cnf.alpha, random_state=config.model_cnf.random_state)
         )
     ]
 )

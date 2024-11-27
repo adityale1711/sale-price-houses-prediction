@@ -37,15 +37,15 @@ class ModelConfig(BaseModel):
     categorical_vars: Sequence[str]
     exposure_mappings: Dict[str, int]
     variables_to_rename: Dict
-    numerical_log_vars: Sequence[str]
+    numericals_log_vars: Sequence[str]
     numerical_vars_with_na: List[str]
     categorical_vars_with_na_missing: List[str]
     categorical_vars_with_na_frequent: List[str]
 
 # Master config object
 class Config(BaseModel):
-    app_config: AppConfig
-    model_config: ModelConfig
+    app_cnf: AppConfig
+    model_cnf: ModelConfig
 
 # Locate the configuration file
 def find_config_file() -> Path:
@@ -72,7 +72,7 @@ def create_and_validate_config(parsed_config: YAML = None) -> Config:
         parsed_config = fetch_config_from_yaml()
 
     # Specify the data attribute from the strictyaml YAML type
-    _config = Config(app_config=AppConfig(**parsed_config.data), model_config=ModelConfig(**parsed_config.data))
+    _config = Config(app_cnf=AppConfig(**parsed_config.data), model_cnf=ModelConfig(**parsed_config.data))
 
     return _config
 

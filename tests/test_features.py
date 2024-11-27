@@ -3,8 +3,8 @@ from sale_price_house_prediction_model.processing.features import TemporalVariab
 
 def test_temporal_variable_transformer(sample_input_data):
     transformer = TemporalVariableTransformer(
-        variables=config.model_config.temporal_vars,
-        reference_variable=config.model_config.ref_var
+        variables=config.model_cnf.temporal_vars,
+        reference_variable=config.model_cnf.ref_var
     )
     assert sample_input_data['YearRemodAdd'].iat[0] == 1961
 

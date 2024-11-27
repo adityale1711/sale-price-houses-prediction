@@ -3,7 +3,7 @@ import typing as t
 import pandas as pd
 
 from pathlib import Path
-from Production import __version__ as _version
+from sale_price_house_prediction_model import __version__ as _version
 from sklearn.pipeline import Pipeline
 from sale_price_house_prediction_model.config.core import config, DATASET_DIR, TRAINED_MODEL_DIR
 
@@ -12,7 +12,7 @@ def load_dataset(*, file_name: str) -> pd.DataFrame:
     dataframe['MSSubClass'] = dataframe['MSSubClass'].astype('O')
 
     # rename variables begining with numbers to avoid syntax errors later
-    transformed = dataframe.rename(columns=config.model_config.variables_to_rename)
+    transformed = dataframe.rename(columns=config.model_cnf.variables_to_rename)
 
     return transformed
 
@@ -26,7 +26,7 @@ def remove_old_pipeline(*, files_to_keep: t.List[str]) -> None:
 # Persist the pipeline
 def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
     # Prepare versioned save file name
-    save_file_name = f'{config.app_config.pipeline_save_file}{_version}.pkl'
+    save_file_name = f'{config.app_cnf.pipeline_save_file}{_version}.pkl'
     save_path = TRAINED_MODEL_DIR / save_file_name
 
     remove_old_pipeline(files_to_keep=[save_file_name])

@@ -8,14 +8,14 @@ from processing.data_manager import load_dataset, save_pipeline
 # Train the model
 def run_training() -> None:
     # read training data
-    data = load_dataset(file_name=config.app_config.training_data_file)
+    data = load_dataset(file_name=config.app_cnf.training_data_file)
 
     # divide train and test set
     X_train, X_test, y_train, y_test = train_test_split(
-        data[config.model_config.features],
-        data[config.model_config.target],
-        test_size=config.model_config.test_size,
-        random_state=config.model_config.random_state
+        data[config.model_cnf.features],
+        data[config.model_cnf.target],
+        test_size=config.model_cnf.test_size,
+        random_state=config.model_cnf.random_state
     )
     y_train = np.log(y_train)
 
