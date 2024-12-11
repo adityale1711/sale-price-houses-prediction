@@ -1,6 +1,7 @@
 from sale_price_house_prediction_model.config.core import config
 from sale_price_house_prediction_model.processing.features import TemporalVariableTransformer
 
+
 def test_temporal_variable_transformer(sample_input_data):
     transformer = TemporalVariableTransformer(
         variables=config.model_cnf.temporal_vars,
@@ -9,4 +10,4 @@ def test_temporal_variable_transformer(sample_input_data):
     assert sample_input_data['YearRemodAdd'].iat[0] == 1961
 
     subject = transformer.fit_transform(sample_input_data)
-    assert  subject['YearRemodAdd'].iat[0] == 49
+    assert subject['YearRemodAdd'].iat[0] == 49

@@ -1,14 +1,16 @@
-import sale_price_house_prediction_model
-
-from typing import Dict, List, Sequence, Optional
 from pathlib import Path
+from typing import Dict, List, Optional, Sequence
+
 from pydantic import BaseModel
 from strictyaml import YAML, load
+
+import sale_price_house_prediction_model
 
 PACKAGE_ROOT = Path(sale_price_house_prediction_model.__file__).resolve().parent
 DATASET_DIR = PACKAGE_ROOT / 'datasets'
 CONFIG_FILE_PATH = PACKAGE_ROOT / 'config.yml'
 TRAINED_MODEL_DIR = PACKAGE_ROOT / 'trained_models'
+
 
 # Application-Level config
 class AppConfig(BaseModel):
@@ -16,6 +18,7 @@ class AppConfig(BaseModel):
     training_data_file: str
     test_data_file: str
     pipeline_save_file: str
+
 
 # All configuration that relevant to model training and feature engineering
 class ModelConfig(BaseModel):
@@ -42,10 +45,12 @@ class ModelConfig(BaseModel):
     categorical_vars_with_na_missing: List[str]
     categorical_vars_with_na_frequent: List[str]
 
+
 # Master config object
 class Config(BaseModel):
     app_cnf: AppConfig
     model_cnf: ModelConfig
+
 
 # Locate the configuration file
 def find_config_file() -> Path:
@@ -53,6 +58,7 @@ def find_config_file() -> Path:
         return CONFIG_FILE_PATH
 
     raise Exception(f'Config not found at {CONFIG_FILE_PATH!r}')
+
 
 # Parse YAML containing the package configuration
 def fetch_config_from_yaml(cfg_path: Optional[Path] = None) -> YAML:
@@ -66,14 +72,19 @@ def fetch_config_from_yaml(cfg_path: Optional[Path] = None) -> YAML:
 
     raise OSError(f'Did not find config file at path: {cfg_path}')
 
+
 # Run validation on config values
 def create_and_validate_config(parsed_config: YAML = None) -> Config:
     if parsed_config is None:
         parsed_config = fetch_config_from_yaml()
 
     # Specify the data attribute from the strictyaml YAML type
-    _config = Config(app_cnf=AppConfig(**parsed_config.data), model_cnf=ModelConfig(**parsed_config.data))
+    _config = Config(
+        app_cnf=AppConfig(**parsed_config.data),
+        model_cnf=ModelConfig(**parsed_config.data)
+    )
 
     return _config
+
 
 config = create_and_validate_config()

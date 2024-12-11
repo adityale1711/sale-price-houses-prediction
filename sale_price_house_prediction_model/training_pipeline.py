@@ -1,9 +1,9 @@
 import numpy as np
-
-from pipeline import price_pipe
 from config.core import config
-from sklearn.model_selection import train_test_split
+from pipeline import price_pipe
 from processing.data_manager import load_dataset, save_pipeline
+from sklearn.model_selection import train_test_split
+
 
 # Train the model
 def run_training() -> None:
@@ -24,6 +24,7 @@ def run_training() -> None:
 
     # persist trained model
     save_pipeline(pipeline_to_persist=price_pipe)
+
 
 if __name__ == '__main__':
     run_training()
