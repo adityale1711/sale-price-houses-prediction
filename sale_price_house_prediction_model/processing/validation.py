@@ -1,9 +1,8 @@
-from typing import List, Optional, Tuple
-
 import numpy as np
 import pandas as pd
-from pydantic import BaseModel, ValidationError
 
+from typing import List, Optional, Tuple
+from pydantic import BaseModel, ValidationError
 from sale_price_house_prediction_model.config.core import config
 
 

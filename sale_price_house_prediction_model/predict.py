@@ -25,7 +25,7 @@ def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
     if not errors:
         predictions = _price_pipe.predict(X=validated_data[config.model_cnf.features])
         results = {
-            'predictions': ', '.join(map(str, [np.exp(pred) for pred in predictions])),
+            'predictions': [np.exp(pred) for pred in predictions],
             'version': _version,
             'errors': errors
         }

@@ -22,28 +22,28 @@ class AppConfig(BaseModel):
 
 # All configuration that relevant to model training and feature engineering
 class ModelConfig(BaseModel):
-    alpha: float
     target: str
-    ref_var: str
+    variables_to_rename: Dict
     features: List[str]
     test_size: float
+    random_state: int
+    alpha: float
+    categorical_vars_with_na_frequent: List[str]
+    categorical_vars_with_na_missing: List[str]
+    numerical_vars_with_na: List[str]
+    temporal_vars: List[str]
+    ref_var: str
+    numericals_log_vars: Sequence[str]
+    binarize_vars: Sequence[str]
     qual_vars: List[str]
+    exposure_vars: List[str]
     finish_vars: List[str]
     garage_vars: List[str]
-    random_state: int
+    categorical_vars: Sequence[str]
     qual_mappings: Dict[str, int]
-    exposure_vars: List[str]
-    temporal_vars: List[str]
-    binarize_vars: Sequence[str]
+    exposure_mappings: Dict[str, int]
     garage_mappings: Dict[str, int]
     finish_mappings: Dict[str, int]
-    categorical_vars: Sequence[str]
-    exposure_mappings: Dict[str, int]
-    variables_to_rename: Dict
-    numericals_log_vars: Sequence[str]
-    numerical_vars_with_na: List[str]
-    categorical_vars_with_na_missing: List[str]
-    categorical_vars_with_na_frequent: List[str]
 
 
 # Master config object

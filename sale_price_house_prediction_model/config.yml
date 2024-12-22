@@ -1,5 +1,5 @@
 # Package Overview
-package_name: regression_model
+package_name: sale_price_house_prediction_model
 
 # Data Files
 training_data_file: train.csv
@@ -8,14 +8,14 @@ test_data_file: test.csv
 # The variable are attempting to predict
 target: SalePrice
 
-pipeline_name: regression_model
-pipeline_save_file: regression_model_output_v
+pipeline_name: sale_price_house_prediction_model
+pipeline_save_file: sale_price_house_prediction_model_output_v
 
 # Will cause syntax error since they begin with numbers
 variables_to_rename:
   1stFlrSF: FirstFlrSF
   2ndFlrSF: SecondFlrSF
-  3SsnPorch: ThreeSsnPorch
+  3SsnPorch: ThreeSsnPortch
 
 features:
   - MSSubClass
