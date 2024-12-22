@@ -1,4 +1,5 @@
 import math
+
 import numpy as np
 
 from sale_price_house_prediction_model.predict import make_prediction

@@ -1,4 +1,4 @@
-import typing as t
+from typing import Any, Dict, Union
 
 import numpy as np
 import pandas as pd
@@ -13,10 +13,14 @@ _price_pipe = load_pipeline(file_name=pipeline_file_name)
 
 
 # Make prediction using a saved model pipeline
-def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
-    data = pd.DataFrame(input_data)
+def make_prediction(*, input_data: Union[pd.DataFrame, Dict[str, Any]]) -> Dict[str, Any]:
+    if isinstance(input_data, dict):
+        data = pd.DataFrame([input_data])
+    else:
+        data = input_data
+
     validated_data, errors = validate_input(input_data=data)
-    results = {
+    results: Dict[str, Any] = {
         'predictions': None,
         'version': _version,
         'errors': errors
@@ -24,10 +28,6 @@ def make_prediction(*, input_data: t.Union[pd.DataFrame, dict]) -> dict:
 
     if not errors:
         predictions = _price_pipe.predict(X=validated_data[config.model_cnf.features])
-        results = {
-            'predictions': [np.exp(pred) for pred in predictions],
-            'version': _version,
-            'errors': errors
-        }
+        results['predictions'] = [(np.exp(pred)) for pred in predictions]
 
     return results
