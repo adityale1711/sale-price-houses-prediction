@@ -1,8 +1,6 @@
 import json
-
 import numpy as np
 import pandas as pd
-from matplotlib.font_manager import json_load
 
 from app import __version__, schemas
 from typing import Any
