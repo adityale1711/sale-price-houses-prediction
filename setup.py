@@ -2,7 +2,7 @@ from pathlib import Path
 from setuptools import find_packages, setup
 
 # Package metadata
-NAME = 'tid-sale-price-house-prediction'
+NAME = 'sale-price-house-prediction-adityalesmana'
 DESCRIPTION = 'Sale price house prediction model package using regression from Train in Data'
 URL = 'https://github.com/adityale1711/Sale-Price-Houses-Prediction'
 EMAIL = 'a.lesmana1711@gmail.com'
@@ -50,6 +50,6 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python :: Implementation :: PyPY'
+        'Programming Language :: Python :: Implementation :: PyPy'
     ]
 )
