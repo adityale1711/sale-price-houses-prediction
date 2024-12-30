@@ -4,3 +4,4 @@ sale_price_house_prediction_model/__pycache__/
 sale_price_house_prediction_model/config/__pycache__/
 sale_price_house_prediction_model/processing/__pycache__/
 tests/__pycache__/
+.tox/
