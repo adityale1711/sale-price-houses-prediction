@@ -1,8 +1,6 @@
 uvicorn
 fastapi
 python-multipart
-pydantic==1.10.19
 typing_extensions
 loguru
-tid-sale-price-house-prediction
-feature-engine==1.5.*
+sale-price-house-prediction-adityalesmana==0.0.1

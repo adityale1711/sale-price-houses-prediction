@@ -8,7 +8,7 @@ from pydantic import BaseSettings, AnyHttpUrl
 
 
 class LoggingSettings(BaseSettings):
-    LOGGING_LEVEL: int = logging.INFO
+    LOGGING_LEVEL: int = logging.DEBUG
 
 
 class Settings(BaseSettings):
