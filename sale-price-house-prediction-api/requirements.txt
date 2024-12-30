@@ -1,0 +1,6 @@
+uvicorn
+fastapi
+python-multipart
+typing_extensions
+loguru
+sale-price-house-prediction-adityalesmana==0.0.1
