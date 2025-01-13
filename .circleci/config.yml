@@ -87,11 +87,11 @@ workflows:
     jobs:
       - test_app
       - deploy_app_to_railway:
-          - requires:
-              - test_app
-          - filters:
-              branches:
-                only:
-                  - ci/cd
+          requires:
+            - test_app
+          filters:
+            branches:
+              only:
+                - ci/cd
       - test_and_upload_sale_price_house_prediction_model:
           <<: *tags_only
