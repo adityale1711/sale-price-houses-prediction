@@ -48,7 +48,7 @@ jobs:
       - node/install:
           node-version: '16.13'
       - run: node --version
-      - run: npm -i -g @railway/cli
+      - run: npm install -g @railway/cli
       - run:
           name: Deploy to Railway App
           command: |
