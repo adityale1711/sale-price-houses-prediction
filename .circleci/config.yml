@@ -52,7 +52,7 @@ jobs:
       - run:
           name: Deploy to Railway App
           command: |
-            cd sale-price-house-prediction-api && railway up --detach
+            cd sale-price-house-prediction-api && railway up --detach --service sale-price-house-api
 
   test_and_upload_sale_price_house_prediction_model:
     <<: *defaults
